@@ -4,6 +4,7 @@ import HeroSection from './sections/HeroSection'
 import AboutSection from './sections/AboutSection'
 import ExperienceSection from './sections/ExperienceSection'
 import ProjectsSection from './sections/ProjectsSection'
+import ProjectDetailPage from './sections/ProjectDetailPage'
 import ToolsSection from './sections/ToolsSection'
 import ContactSection from './sections/ContactSection'
 import Footer from './components/Footer'
@@ -18,6 +19,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [isNight, setIsNight] = useState(true)
   const [activeSection, setActiveSection] = useState('home')
+  const [activeProject, setActiveProject] = useState<string | null>(null)
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2500)
@@ -25,6 +27,8 @@ function App() {
   }, [])
 
   useEffect(() => {
+    if (activeProject) return // Don't track scroll when on project page
+
     const handleScroll = () => {
       const sections = ['home', 'about', 'projects', 'tools', 'contact']
       const scrollPos = window.scrollY + 200
@@ -43,12 +47,41 @@ function App() {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [activeProject])
+
+  const handleProjectClick = (projectId: string) => {
+    setActiveProject(projectId)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleBackToPortfolio = () => {
+    setActiveProject(null)
+    // Scroll to projects section after a short delay
+    setTimeout(() => {
+      const el = document.getElementById('projects')
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
+  }
 
   if (isLoading) {
     return <LoadingScreen />
   }
 
+  // Show project detail page
+  if (activeProject) {
+    return (
+      <div className="relative min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-[#1A1A40]">
+        <CursorTrail />
+        <ParallaxBackground isNight={isNight} />
+        <Fireflies />
+        <Navbar activeSection="projects" />
+        <ProjectDetailPage projectId={activeProject} onBack={handleBackToPortfolio} />
+        <Footer />
+      </div>
+    )
+  }
+
+  // Main portfolio
   return (
     <div className={`relative min-h-screen w-full max-w-[100vw] overflow-x-hidden ${isNight ? 'bg-[#1A1A40]' : 'bg-[#16213E]'} transition-colors duration-1000`}>
       <CursorTrail />
@@ -63,7 +96,7 @@ function App() {
         <HeroSection />
         <AboutSection />
         <ExperienceSection />
-        <ProjectsSection />
+        <ProjectsSection onProjectClick={handleProjectClick} />
         <ToolsSection />
         <ContactSection />
       </main>

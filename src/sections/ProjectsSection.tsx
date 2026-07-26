@@ -1,34 +1,35 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { ExternalLink, X } from 'lucide-react'
+import { useRef } from 'react'
+import { ExternalLink } from 'lucide-react'
 
-interface Project {
+interface ProjectCardData {
+  id: string
   title: string
   description: string
   tags: string[]
   color: string
   status: 'completed' | 'in-progress' | 'upcoming'
-  link?: string
 }
 
-const projects: Project[] = [
+const projects: ProjectCardData[] = [
   {
+    id: 'catrimonial-ai',
     title: 'Catrimonial AI',
     description: 'An AI-powered platform for cat parents to create profiles, find breed matches, explore adoption options and manage their cat\'s health.',
     tags: ['React', 'Tailwind CSS', 'Node.js', 'MongoDB'],
     color: '#FF7EB6',
     status: 'completed',
-    link: '#',
   },
   {
+    id: 'saas-landing-page',
     title: 'SaaS Landing Page',
     description: 'A modern and responsive SaaS landing page design with clean UI, engaging sections and smooth user experience.',
     tags: ['Figma', 'HTML', 'Tailwind CSS'],
     color: '#8A63D2',
     status: 'completed',
-    link: '#',
   },
   {
+    id: 'wanderly-travel',
     title: 'Wanderly Travel Website',
     description: 'A full-stack travel website to explore destinations, plan trips, and book experiences seamlessly.',
     tags: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS'],
@@ -36,6 +37,7 @@ const projects: Project[] = [
     status: 'in-progress',
   },
   {
+    id: 'house-price-prediction',
     title: 'House Price Prediction',
     description: 'A machine learning project to predict house prices based on various features using regression models.',
     tags: ['Python', 'ML', 'Scikit-learn'],
@@ -44,15 +46,18 @@ const projects: Project[] = [
   },
 ]
 
-export default function ProjectsSection() {
+interface ProjectsSectionProps {
+  onProjectClick: (projectId: string) => void
+}
+
+export default function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
   return (
-    <section id="projects" className="relative py-48" ref={ref}>
+    <section id="projects" className="relative py-24" ref={ref}>
       <div className="w-full px-6 sm:px-10 lg:px-20 xl:px-32">
-        {/* Section title - banner style */}
+        {/* Section title */}
         <motion.div
           className="text-center mb-20"
           initial={{ y: -20, opacity: 0 }}
@@ -62,31 +67,29 @@ export default function ProjectsSection() {
             ⭐ FEATURED PROJECTS ⭐
           </h2>
           <div className="w-24 h-1 bg-[#F5D76E] mx-auto mt-3" />
-          <p className="retro-text text-xl text-[#F5F5F5]/60 mt-4">Buildings in my pixel village</p>
+          <p className="retro-text text-xl text-[#F5F5F5]/60 mt-4">Click a project to explore details</p>
         </motion.div>
 
-        {/* Project grid - 2 LARGE featured on top + 2 smaller on bottom */}
+        {/* Project grid */}
         <div className="space-y-16">
           {/* Top row - 2 large featured cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {projects.slice(0, 2).map((project, index) => (
               <motion.div
-                key={project.title}
+                key={project.id}
                 className="group cursor-pointer"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.15 * index }}
-                onClick={() => setSelectedProject(project)}
+                onClick={() => onProjectClick(project.id)}
               >
                 <motion.div
                   className="border-4 border-[#8A63D2] bg-[#1A1A40]/80 p-8 md:p-10 h-full flex flex-col relative overflow-hidden"
                   whileHover={{ y: -5, scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
-                  {/* Top accent */}
                   <div className="absolute top-0 left-0 right-0 h-1.5" style={{ backgroundColor: project.color, opacity: 0.8 }} />
 
-                  {/* Building icon + status */}
                   <div className="flex items-center justify-between mb-6">
                     <svg viewBox="0 0 24 24" className="w-12 h-12" style={{ imageRendering: 'pixelated' }}>
                       <rect x="4" y="4" width="16" height="16" fill={project.color} opacity="0.2" />
@@ -108,13 +111,9 @@ export default function ProjectsSection() {
                     </span>
                   </div>
 
-                  {/* Title */}
                   <h3 className="pixel-text text-[10px] md:text-xs text-[#FF7EB6] mb-4">{project.title}</h3>
-
-                  {/* Description */}
                   <p className="retro-text text-2xl text-[#F5F5F5]/80 leading-relaxed mb-6 flex-1">{project.description}</p>
 
-                  {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map(tag => (
                       <span key={tag} className="pixel-text text-[7px] px-3 py-1 bg-[#8A63D2]/15 text-[#8A63D2] border border-[#8A63D2]/20">
@@ -123,12 +122,9 @@ export default function ProjectsSection() {
                     ))}
                   </div>
 
-                  {/* Link */}
-                  {project.link && (
-                    <div className="flex items-center gap-2 pixel-text text-[8px] text-[#F5D76E] group-hover:text-[#FF7EB6] transition-colors">
-                      VIEW PROJECT <ExternalLink className="w-3 h-3" />
-                    </div>
-                  )}
+                  <div className="flex items-center gap-2 pixel-text text-[8px] text-[#F5D76E] group-hover:text-[#FF7EB6] transition-colors">
+                    VIEW DETAILS <ExternalLink className="w-3 h-3" />
+                  </div>
                 </motion.div>
               </motion.div>
             ))}
@@ -138,22 +134,20 @@ export default function ProjectsSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {projects.slice(2, 4).map((project, index) => (
               <motion.div
-                key={project.title}
+                key={project.id}
                 className="group cursor-pointer"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.15 * (index + 2) }}
-                onClick={() => setSelectedProject(project)}
+                onClick={() => onProjectClick(project.id)}
               >
                 <motion.div
                   className="border-2 border-[#8A63D2]/30 bg-[#1A1A40]/80 p-6 md:p-8 h-full flex flex-col relative overflow-hidden"
                   whileHover={{ y: -5, scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
-                  {/* Top accent */}
                   <div className="absolute top-0 left-0 right-0 h-1" style={{ backgroundColor: project.color, opacity: 0.6 }} />
 
-                  {/* Building icon + status */}
                   <div className="flex items-center justify-between mb-5">
                     <svg viewBox="0 0 24 24" className="w-10 h-10" style={{ imageRendering: 'pixelated' }}>
                       <rect x="4" y="4" width="16" height="16" fill={project.color} opacity="0.2" />
@@ -175,19 +169,19 @@ export default function ProjectsSection() {
                     </span>
                   </div>
 
-                  {/* Title */}
                   <h3 className="pixel-text text-[10px] text-[#FF7EB6] mb-3">{project.title}</h3>
-
-                  {/* Description */}
                   <p className="retro-text text-2xl text-[#F5F5F5]/80 leading-relaxed mb-5 flex-1">{project.description}</p>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map(tag => (
                       <span key={tag} className="pixel-text text-[7px] px-3 py-1 bg-[#8A63D2]/15 text-[#8A63D2] border border-[#8A63D2]/20">
                         {tag}
                       </span>
                     ))}
+                  </div>
+
+                  <div className="flex items-center gap-2 pixel-text text-[8px] text-[#F5D76E] group-hover:text-[#FF7EB6] transition-colors">
+                    VIEW DETAILS <ExternalLink className="w-3 h-3" />
                   </div>
                 </motion.div>
               </motion.div>
@@ -195,34 +189,6 @@ export default function ProjectsSection() {
           </div>
         </div>
       </div>
-
-      {/* Modal */}
-      {selectedProject && (
-        <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/70"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          onClick={() => setSelectedProject(null)}
-        >
-          <motion.div
-            className="border-4 border-[#8A63D2] bg-[#1A1A40] p-8 md:p-10 max-w-lg w-full relative"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            onClick={e => e.stopPropagation()}
-          >
-            <button onClick={() => setSelectedProject(null)} className="absolute top-4 right-4 text-[#FF7EB6] hover:text-white" aria-label="Close">
-              <X className="w-5 h-5" />
-            </button>
-            <h3 className="pixel-text text-xs text-[#FF7EB6] mb-4">{selectedProject.title}</h3>
-            <p className="retro-text text-xl text-[#F5F5F5]/90 mb-6">{selectedProject.description}</p>
-            <div className="flex flex-wrap gap-2">
-              {selectedProject.tags.map(tag => (
-                <span key={tag} className="pixel-text text-[8px] px-3 py-1 bg-[#8A63D2]/20 text-[#8A63D2] border border-[#8A63D2]/30">{tag}</span>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
     </section>
   )
 }
