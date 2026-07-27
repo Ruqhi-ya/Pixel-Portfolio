@@ -7,5 +7,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/pixel-portfolio/',
+  base: '/Pixel-Portfolio/',
 })
