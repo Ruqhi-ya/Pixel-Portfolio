@@ -27,7 +27,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#1A1A40]/95 backdrop-blur-sm border-b-[3px] border-[#8A63D2] w-full" role="navigation" aria-label="Main navigation">
-      <div className="w-full px-6 sm:px-10 lg:px-16">
+      <div className="w-full px-4 sm:px-6 lg:px-10">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.button

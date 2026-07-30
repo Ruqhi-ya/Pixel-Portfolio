@@ -38,7 +38,7 @@ export default function ToolsSection() {
 
   return (
     <section id="tools" className="relative py-52 bg-[#16213E]/30" ref={ref}>
-      <div className="w-full px-6 sm:px-10 lg:px-20 xl:px-32">
+      <div className="section-container">
         {/* Section title */}
         <motion.div
           className="text-center mb-20"
@@ -52,7 +52,7 @@ export default function ToolsSection() {
         </motion.div>
 
         {/* Two columns: Left = Unlocked, Right = Training */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
           {/* LEFT - Skills Unlocked */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}

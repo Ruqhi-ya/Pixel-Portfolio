@@ -40,7 +40,7 @@ export default function ExperienceSection() {
 
   return (
     <section className="relative py-48 bg-[#0d1025]/40" ref={ref}>
-      <div className="w-full px-6 sm:px-10 lg:px-20 xl:px-32">
+      <div className="section-container">
         {/* Section title - banner style */}
         <motion.div
           className="text-center mb-20"
@@ -55,7 +55,7 @@ export default function ExperienceSection() {
         </motion.div>
 
         {/* Quest cards - 3 horizontal, stacked on mobile */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
           {quests.map((quest, index) => (
             <motion.div
               key={quest.role}

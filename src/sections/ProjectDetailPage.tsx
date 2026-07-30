@@ -109,7 +109,7 @@ export default function ProjectDetailPage({ projectId, onBack }: ProjectDetailPa
       exit={{ opacity: 0, x: -50 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="w-full px-6 sm:px-10 lg:px-20 xl:px-32">
+      <div className="section-container">
         {/* Back button */}
         <motion.button
           onClick={onBack}

@@ -7,7 +7,7 @@ export default function Footer() {
       {/* Ground line */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-[#2F8F46]" />
       
-      <div className="w-full px-4 sm:px-8 lg:px-16 xl:px-24 relative">
+      <div className="section-container relative">
         {/* Campfire */}
         <div className="flex flex-col items-center mb-6">
           <div className="relative">

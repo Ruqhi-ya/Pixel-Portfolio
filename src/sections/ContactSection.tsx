@@ -17,7 +17,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="relative py-56" ref={ref}>
-      <div className="w-full px-6 sm:px-10 lg:px-20 xl:px-32">
+      <div className="section-container">
         {/* Section title */}
         <motion.div
           className="text-center mb-16"

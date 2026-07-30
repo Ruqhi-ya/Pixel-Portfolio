@@ -8,9 +8,9 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="relative py-44 bg-[#16213E]/40" ref={ref}>
-      <div className="w-full px-6 sm:px-10 lg:px-20 xl:px-32">
+      <div className="section-container">
         {/* Two columns: LEFT = About + Education + Info, RIGHT = Skills */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
 
           {/* LEFT COLUMN */}
           <motion.div
@@ -102,7 +102,7 @@ export default function AboutSection() {
               {/* Frontend */}
               <div>
                 <p className="pixel-text text-[9px] text-[#61DAFB] mb-4">FRONTEND</p>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {['HTML', 'CSS / SCSS', 'JavaScript', 'React.js', 'Tailwind CSS', 'Responsive Design'].map(skill => (
                     <div key={skill} className="flex items-center gap-2 py-2 px-3 border border-[#8A63D2]/20 bg-[#16213E]/40">
                       <div className="w-2 h-2 bg-[#61DAFB] flex-shrink-0" />
@@ -115,7 +115,7 @@ export default function AboutSection() {
               {/* Design */}
               <div>
                 <p className="pixel-text text-[9px] text-[#A259FF] mb-4">DESIGN</p>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {['Figma', 'Wireframing', 'UI Design', 'Prototyping', 'Design Systems', 'User Research'].map(skill => (
                     <div key={skill} className="flex items-center gap-2 py-2 px-3 border border-[#8A63D2]/20 bg-[#16213E]/40">
                       <div className="w-2 h-2 bg-[#A259FF] flex-shrink-0" />
@@ -128,7 +128,7 @@ export default function AboutSection() {
               {/* Product */}
               <div>
                 <p className="pixel-text text-[9px] text-[#FF7EB6] mb-4">PRODUCT</p>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {['Product Thinking', 'User Flows', 'User Personas', 'Info Architecture'].map(skill => (
                     <div key={skill} className="flex items-center gap-2 py-2 px-3 border border-[#8A63D2]/20 bg-[#16213E]/40">
                       <div className="w-2 h-2 bg-[#FF7EB6] flex-shrink-0" />

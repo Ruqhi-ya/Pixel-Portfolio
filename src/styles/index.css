@@ -56,7 +56,7 @@ img, canvas, .pixel-art {
 
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -110,12 +110,46 @@ img, canvas, .pixel-art {
 /* ===== PIXEL TEXT ===== */
 .pixel-text {
   font-family: 'Press Start 2P', cursive;
-  line-height: 1.6;
+  line-height: 1.8;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .retro-text {
   font-family: 'VT323', monospace;
   line-height: 1.4;
+}
+
+/* ===== SECTION CONTAINER ===== */
+.section-container {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-container {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-container {
+    padding-left: 6rem;
+    padding-right: 6rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ===== ANIMATIONS ===== */
@@ -142,11 +176,6 @@ img, canvas, .pixel-art {
 @keyframes sway {
   0%, 100% { transform: rotate(-2deg); }
   50% { transform: rotate(2deg); }
-}
-
-@keyframes flyAcross {
-  0% { transform: translateX(-100px); }
-  100% { transform: translateX(calc(100vw + 100px)); }
 }
 
 @keyframes firefly {
@@ -193,19 +222,14 @@ img, canvas, .pixel-art {
 .animate-cat-tail { animation: catTail 2s ease-in-out infinite; }
 .animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
 
-/* ===== SECTION TRANSITIONS ===== */
-.section-transition {
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* ===== RESPONSIVE PIXEL SCALING ===== */
 @media (max-width: 768px) {
   :root {
     --pixel-size: 2px;
   }
   .pixel-text {
-    font-size: 0.55rem;
-    line-height: 1.8;
+    font-size: 0.5rem;
+    line-height: 2;
   }
 }
 
@@ -214,6 +238,7 @@ img, canvas, .pixel-art {
     --pixel-size: 1px;
   }
   .pixel-text {
-    font-size: 0.5rem;
+    font-size: 0.45rem;
+    line-height: 2;
   }
 }

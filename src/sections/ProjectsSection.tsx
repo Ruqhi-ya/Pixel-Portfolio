@@ -56,7 +56,7 @@ export default function ProjectsSection({ onProjectClick }: ProjectsSectionProps
 
   return (
     <section id="projects" className="relative py-24" ref={ref}>
-      <div className="w-full px-6 sm:px-10 lg:px-20 xl:px-32">
+      <div className="section-container">
         {/* Section title */}
         <motion.div
           className="text-center mb-20"
@@ -73,7 +73,7 @@ export default function ProjectsSection({ onProjectClick }: ProjectsSectionProps
         {/* Project grid */}
         <div className="space-y-16">
           {/* Top row - 2 large featured cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             {projects.slice(0, 2).map((project, index) => (
               <motion.div
                 key={project.id}
@@ -131,7 +131,7 @@ export default function ProjectsSection({ onProjectClick }: ProjectsSectionProps
           </div>
 
           {/* Bottom row - 2 smaller cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             {projects.slice(2, 4).map((project, index) => (
               <motion.div
                 key={project.id}

@@ -70,7 +70,7 @@ export default function HeroSection() {
       ))}
 
       {/* Main content */}
-      <div className="w-full px-4 sm:px-8 lg:px-16 xl:px-24 relative z-10">
+      <div className="section-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left side - Character */}
           <motion.div
