@@ -22,7 +22,7 @@ function App() {
   const [activeProject, setActiveProject] = useState<string | null>(null)
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2500)
+    const timer = setTimeout(() => setIsLoading(false), 1500)
     return () => clearTimeout(timer)
   }, [])
 

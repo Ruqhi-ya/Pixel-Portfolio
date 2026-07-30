@@ -13,7 +13,11 @@ class ErrorBoundary extends React.Component<
   }
 
   static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error: error.message + '\n' + error.stack }
+    return { hasError: true, error: error.message + '\n' + (error.stack || '') }
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error('React Error Boundary caught:', error, info)
   }
 
   render() {
@@ -29,8 +33,15 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <ErrorBoundary>
-    <App />
-  </ErrorBoundary>,
-)
+const root = document.getElementById('root')
+if (root) {
+  try {
+    ReactDOM.createRoot(root).render(
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>,
+    )
+  } catch (e) {
+    root.innerHTML = `<div style="padding:40px;color:#FF7EB6;background:#1A1A40;min-height:100vh;font-family:monospace"><h1>Fatal Error</h1><pre style="color:#F5D76E">${e}</pre></div>`
+  }
+}
